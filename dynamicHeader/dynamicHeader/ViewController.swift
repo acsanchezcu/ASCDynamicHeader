@@ -10,20 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var scrollView: DynamicHeaderScrollView!
+    var scrollView: DynamicHeaderScrollView?
+    
+    @IBOutlet weak var contentView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let view : UIImageView = UIImageView.init(image: UIImage.init(named: "headerImage"))
-        view.contentMode = UIViewContentMode.ScaleAspectFill
+        let headerView : UIImageView = UIImageView.init(image: UIImage.init(named: "headerImage"))
+        headerView.contentMode = UIViewContentMode.ScaleAspectFill
         
-        let contentView : UIView = UIView.init()
-
-        contentView.backgroundColor = UIColor.redColor()
+        contentView.removeFromSuperview()
         
-        scrollView.headerView = view
-        scrollView.contentView = contentView
+        scrollView = DynamicHeaderScrollView.init()
+        
+        view.addSubview(scrollView!)
+        
+        UIView.embedView(scrollView!)
+        
+        scrollView!.headerView = headerView
+        scrollView!.contentView = contentView
 
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController!.navigationBar.shadowImage = UIImage()

@@ -42,26 +42,33 @@ class DynamicHeaderScrollView: UIView, UIScrollViewDelegate {
 
     //MARK: - Init
     
-//    required init(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)!
-//        
-//        initialize()
-//    }
-//    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        
-//        initialize()
-//    }
+    convenience init () {
+        self.init(frame:CGRect.zero)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        
+        initialize()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        initialize()
+    }
     
     //MARK: - Private Methods
     
     func initialize() {
         
+        translatesAutoresizingMaskIntoConstraints = false
+        
         addHeaderContainerView()
         
         addScrollView()
         
+        scrollContainerView?.showsVerticalScrollIndicator = false
         scrollContainerView?.delegate = self
     }
     
@@ -124,12 +131,19 @@ class DynamicHeaderScrollView: UIView, UIScrollViewDelegate {
         
         scrollContainerView?.addSubview(contentView)
         
-        UIView.embedViewWithSize(contentView, size: CGSize.init(width: screenSize.width, height: 1000))
+        UIView.embedViewWithSize(contentView, size: CGSize.init(width: screenSize.width, height: contentView.frame.height))
     }
     
     //MARK: - UIScrollViewDelegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        //reached end
+        
+        if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
+            
+            return
+        }
         
         var margin = round(scrollView.contentOffset.y)
         

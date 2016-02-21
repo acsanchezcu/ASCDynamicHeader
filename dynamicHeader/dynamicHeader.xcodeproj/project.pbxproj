@@ -64,9 +64,9 @@
 				34B934D81C7887CC002F8C3F /* Classes */,
 				34B934C61C788522002F8C3F /* AppDelegate.swift */,
 				34B934C81C788522002F8C3F /* ViewController.swift */,
-				34B934CA1C788522002F8C3F /* Main.storyboard */,
 				34B934CD1C788522002F8C3F /* Assets.xcassets */,
 				34B934CF1C788522002F8C3F /* LaunchScreen.storyboard */,
+				34B934CA1C788522002F8C3F /* Main.storyboard */,
 				34B934D21C788522002F8C3F /* Info.plist */,
 			);
 			path = dynamicHeader;
